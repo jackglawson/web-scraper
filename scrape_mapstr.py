@@ -1,9 +1,9 @@
 import time
-from dataclasses import dataclass
 import pickle
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from load_mapstr import load_most_recent
+from place import Place
 
 URL = 'https://web.mapstr.com/'
 USERNAME_INPUT_XPATH = '/html/body/div[1]/div/div/div/div[2]/form/div[2]/input'
@@ -65,12 +65,6 @@ addresses = find_addresses(driver)
 tags = find_tags(driver)
 driver.quit()
 print('Found {} addresses and {} tags'.format(len(addresses), len(tags)))
-
-
-@dataclass
-class Place:
-    address: str
-    tags: str
 
 
 places = [Place(address, tag) for address, tag in zip(addresses, tags)]
